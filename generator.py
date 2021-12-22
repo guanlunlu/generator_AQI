@@ -69,7 +69,7 @@ if __name__ == "__main__":
         r = month_avg(row, index)
         list_aqi.append(r.aqi)
 
-    df.insert(1, "aqi", list_aqi)
+    df.insert(df.shape[1], "aqi", list_aqi)
     print (df)
     
         
