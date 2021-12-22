@@ -61,15 +61,19 @@ class month_avg():
         # print("month aqi = ", self.aqi)
 
 if __name__ == "__main__":
-    data = pd.read_excel('generator.xls',sheet_name='wanlee')
-    df = pd.DataFrame(data, columns=['Month','O3','PM2.5','PM10','CO','SO2','NO2'])
-    
-    list_aqi = []
-    for index, row in df.iterrows():
-        r = month_avg(row, index)
-        list_aqi.append(r.aqi)
+    sheetname_list = ['keelung', 'wanlee', 'fukuai', 'salu', 'fengyuan', 'twolin', 'tainan', 'annnan', 'chioutou']
+    for i in sheetname_list:
+        print("--------------------------------------")
+        print(i)
+        data = pd.read_excel('generator.xls',sheet_name = i)
+        df = pd.DataFrame(data, columns=['Month','O3','PM2.5','PM10','CO','SO2','NO2'])
+        list_aqi = []
+        for index, row in df.iterrows():
+            r = month_avg(row, index)
+            list_aqi.append(r.aqi)
+        df.insert(df.shape[1], "aqi", list_aqi)
+        print (df)
 
-    df.insert(df.shape[1], "aqi", list_aqi)
-    print (df)
+
     
         
