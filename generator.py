@@ -62,9 +62,10 @@ class month_avg():
 
 if __name__ == "__main__":
     sheetname_list = ['keelung', 'wanlee', 'fukuai', 'salu', 'fengyuan', 'twolin', 'tainan', 'annnan', 'chioutou']
+    aqi_dict = {}
     for i in sheetname_list:
-        print("--------------------------------------")
-        print(i)
+        # print("-----------------------------------------------------------")
+        # print(i)
         data = pd.read_excel('generator.xls',sheet_name = i)
         df = pd.DataFrame(data, columns=['Month','O3','PM2.5','PM10','CO','SO2','NO2'])
         list_aqi = []
@@ -72,8 +73,11 @@ if __name__ == "__main__":
             r = month_avg(row, index)
             list_aqi.append(r.aqi)
         df.insert(df.shape[1], "aqi", list_aqi)
-        print (df)
-
-
-    
-        
+        aqi_dict[i] = list_aqi
+        # aqi_df.insert(aqi_df.shape[1], i, list_aqi)
+        # print (df)
+    # print (aqi_dict)
+    aqi_df = pd.DataFrame(data=aqi_dict)
+    print(aqi_df)
+    aqi_df.to_csv('aqi.csv')
+    # print(aqi_df)
